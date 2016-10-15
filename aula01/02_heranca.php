@@ -19,8 +19,22 @@ class Conta
 }
 
 //herdei a classe Conta
-class ContaCorrente extends Conta {}
-class ContaPoupanca extends Conta {}
+class ContaCorrente extends Conta {
+	
+	public function mostrarConta()
+	{
+		echo "Sou uma conta corrente";
+	}
+	
+}
+class ContaPoupanca extends Conta {
+	
+	public function mostrarConta() //essa e a assinatura do metodo
+	{
+		echo "Sou uma conta poupanca";
+	}
+}
+
 
 
 $conta1 = new Conta();
@@ -29,9 +43,13 @@ $conta1->depositar(500);
 
 $contaCorrente = new ContaCorrente();
 $contaCorrente->titular = "Titular Conta Corrente";
+$contaCorrente->mostrarConta();
 $contaCorrente->depositar(600);
+
 
 
 $contaPoupanca = new ContaPoupanca();
 $contaPoupanca->titular = "Titular Conta Poupanca";
+$contaPoupanca->mostrarConta();
 $contaPoupanca->depositar(700);
+
