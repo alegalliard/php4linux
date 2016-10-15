@@ -10,8 +10,7 @@ abstract class AbstractConta
 
 	public function depositar($valor, $param2="", $param3="") //com o param2 e 3 setados assim nao precisa setar os parametros ao criar o objeto
 	{
-		$this->saldo = $this->saldo + $valor;
-		//o mesmo que $this->saldo += $valor;
+		$this->saldo += $valor;
 
 		echo "Seu saldo: ".$this->saldo ."<hr>";
 	}
@@ -25,6 +24,9 @@ abstract class AbstractConta
 	{
 		$this->saldo -= $valor;
 	}
+	
+	//metodos abstratos, so declaro. Feito para ser usado depois\//todo mundo que herdar e obrigado a declarar
+	public abstract function mostrarTipoDeConta();
 }
 
 #$conta1 = new Conta(); //instanciar uma classe abstrata nao funciona, so se usar heranca
@@ -38,6 +40,19 @@ class ContaPoupanca extends AbstractConta
 		$this->saldo = $this->saldo*(1+$this->juros);
 	}
 	
+	#declaro ou implemento metodo abstrato para nao dar erro
+	public function mostrarTipoDeconta() {
+		echo "<br>eu sou uma conta poupanca";
+	}
+	
+}
+
+class ContaCorrente extends AbstractConta 
+{
+	//se eu nao declarar ou implementar o metodo abstrato, da erro
+	public function mostrarTipoDeconta() {
+		echo "<br>eu sou uma conta corrente";
+	}
 }
 
 
@@ -45,3 +60,7 @@ $conta1 = new ContaPoupanca();
 $conta1->depositar(500);
 $conta1->calcularJuros();
 $conta1->verSaldo();
+$conta1->mostrarTipoDeConta();
+
+$conta2 = new ContaCorrente();
+$conta2->mostrarTipoDeconta();
