@@ -1,5 +1,5 @@
 <?php
-
+//controla o tipo de parametro que esta sendo passado
 class Usuario {
 	public $email;
 	public $senha;
