@@ -35,4 +35,12 @@ echo "Nome: {$obj->getNome()}";
 echo "<hr>";
 echo "Email: {$obj->getEmail()}";
 echo "<hr>";
+
+
+//a vantagem de usar metodo estatico e que nao precisa instanciar o objeto
 echo "Tipo de usuario: ". Usuario::mostrarTipoUsuario();
+
+echo "<hr>"; 	
+$obj::$tipoUsuario = "Editor";
+
+echo "Tipo de usuario (alterado): ". Usuario::mostrarTipoUsuario();

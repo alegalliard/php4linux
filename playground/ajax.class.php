@@ -14,8 +14,10 @@ abstract class CubeConn {
 	public function setConfig(){
 		//configuracoes da conexao
 	}
-	public function connect() {
-		//conexao e retorno de dados		
+	public static function connect() {
+		//conexao e retorno de dados	
+
+		
 	}
 	
 	public function CRUD($type) {
@@ -34,3 +36,4 @@ abstract class CubeConn {
 	}
 }
 
+//chamaria assim: CubeConnn::connect
