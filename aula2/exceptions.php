@@ -42,5 +42,7 @@
  } catch (Exception $e) {
  	echo "ERRO {$e->getCode()} - <b>{$e->getMessage()}</b>";
  	echo "<hr>";
+ } finally {
  	echo "Saldo atual {$conta->verSaldo()}";
+ 	
  }
