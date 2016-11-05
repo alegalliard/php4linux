@@ -2,27 +2,62 @@
 
 require("mysql.php");
 
+
 class Model {
 	public $pdo;
 	public function __construct() {
 		$this->pdo = Conn::conectar();
+		
 	}
 	
-	public function salvar($dados) {
+	
+	
+	public function salvar(Usuarios $dados) {
 		try {
 			$query = "INSERT INTO usuario (nome,email,senha) 
 					VALUES (:nome, :email, :senha);";
 			$stmt = $this->pdo->prepare($query);
 			
-			$stmt->bindValue(':nome', $dados['nome']);
-			$stmt->bindValue(':email', $dados['email']);
-			$stmt->bindValue(':senha', $dados['senha']);
+			$stmt->bindValue(':nome', $dados->getNome());
+			$stmt->bindValue(':email', $dados->getEmail());
+			$stmt->bindValue(':senha', $dados->getSenha());
 			
 			$stmt->execute();
-			echo 'salvo com sucesso';
+			return 'salvo com sucesso';
 		}
 		catch( PDOException $e){
-			echo 'Erro ao salvar - '. $e->getMessage();
+			return 'Erro ao salvar - '. $e->getMessage();
 		}
+	}
+	
+	public function editar(Usuarios $dados) {
+		try {
+			$query = "UPDATE usuario SET nome = :nome, email = :email ,senha = :senha
+					WHERE id = :id;";
+			$stmt = $this->pdo->prepare($query);
+				
+			$stmt->bindValue(':nome', $dados->getNome());
+			$stmt->bindValue(':email', $dados->getEmail());
+			$stmt->bindValue(':senha', $dados->getSenha());
+			$stmt->bindValue(':id', $dados->getId());
+				
+			$stmt->execute();
+			return 'Atualizado com sucesso';
+		}
+		catch( PDOException $e){
+			return 'Erro ao atualizar - '. $e->getMessage();
+		}
+		
+	}
+	
+	public function buscarRegistros() {
+		
+		$query = "SELECT * FROM usuario;";
+		$stmt = $this->pdo->prepare($query);
+		
+		$stmt->execute();
+		
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
 	}
 }
